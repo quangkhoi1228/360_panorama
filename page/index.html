@@ -1,0 +1,58 @@
+{% extends "template/roottemplate.html" %}
+
+{% block content %}
+<form id="formInput" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+	<div class="field">
+		<div class="file is-info ">
+			<label class="file-label">
+				<input class="file-input" type="file" name="image" multiple>
+				<button class="is-hidden" type="submit">Upload
+					file</button>
+				<span class="file-cta" style="
+				background: #fca072;
+			">
+					<span class="file-icon">
+						<i class="fas fa-upload"></i>
+					</span>
+					<span class="file-label">
+						Chọn ảnh
+					</span>
+				</span>
+			</label>
+		</div>
+	</div>
+	<div id="allResult" class="is-hidden">
+		<script>
+			var result = {};
+			result.status = "{{ status| safe}}";
+			result.listInput = {{ url | safe }};
+			result.output = "{{ output| safe}}";
+			result.copyMakeBorder = "{{ stitched_copyMakeBorder| safe}}";
+			result.gray = "{{ stitched_gray| safe}}";
+		</script>
+	</div>
+
+	<div class="is-hidden">
+		<hr>
+		<h3 class="title is-3">Ảnh đầu vào</h3>
+		<div id="imageInput" class="columns is-multiline"></div>
+	</div>
+	<div class="is-hidden">
+		<hr>
+		<h3 class="title is-3">Ảnh đầu ra</h3>
+		<div id="imageOutput" class=""></div>
+	</div>
+	<div class="is-hidden">
+		<hr>
+		<h3 class="title is-3">Quá trình xử lý</h3>
+		<div id="imageProcess" class=""></div>
+	</div>
+</form>
+<script>
+	document.addEventListener('DOMContentLoaded', (event) => {
+		indexrender.build();
+	});
+</script>
+
+{% endblock %}
