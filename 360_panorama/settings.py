@@ -50,7 +50,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'trafficsign.urls'
+ROOT_URLCONF = '360_panorama.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'trafficsign.wsgi.application'
+WSGI_APPLICATION = '360_panorama.wsgi.application'
 
 
 # Database

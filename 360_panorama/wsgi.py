@@ -11,6 +11,6 @@ import os
 import whitenoise
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'trafficsign.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', '360_panorama.settings')
 
 application = get_wsgi_application()

@@ -1,2 +1,2 @@
-web: gunicorn trafficsign.wsgi --log-file -
+web: gunicorn 360_panorama.wsgi --log-file -
 
