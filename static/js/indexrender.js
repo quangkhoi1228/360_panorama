@@ -19,11 +19,12 @@ var indexrender = {
 
 
     addEventRenderResult: function () {
-        console.log(result);
+
         var inputContainer = document.getElementById('imageInput');
         if (result.listInput.length > 0) {
             inputContainer.parentElement.classList.remove('is-hidden');
         }
+
         result.listInput.forEach(function (image) {
             console.log(image);
             var item = document.createElement('div');
@@ -38,64 +39,46 @@ var indexrender = {
             inputContainer.appendChild(item);
         });
 
-        var outputContainer = document.getElementById('imageOutput');
-        outputContainer.parentElement.classList.remove('is-hidden');
-        var item1 = document.createElement('div');
-        item1.innerHTML = `<figure class="image" >
+        if (result.status == 'True') {
+            var outputContainer = document.getElementById('imageOutput');
+            outputContainer.parentElement.classList.remove('is-hidden');
+            var item1 = document.createElement('div');
+            item1.innerHTML = `<figure class="image" >
                 <img src="${result.output}" style="
                 max-height: 80vh;
                 object-fit: cover;
                 width: auto;
             ">
             </figure>`;
-        outputContainer.appendChild(item1);
+            outputContainer.appendChild(item1);
 
-        var processContainer = document.getElementById('imageProcess');
-        processContainer.parentElement.classList.remove('is-hidden');
-        var item2 = document.createElement('div');
-        item2.setAttribute('class', 'block');
-        item2.innerHTML = `
-        <div>
-        <p class="subtitle">copyMakeBorder</p>
-        <figure class="image" >
-                <img src="${result.copyMakeBorder}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>
-        </div>`;
-        processContainer.appendChild(item2);
+            var processContainer = document.getElementById('imageProcess');
+            processContainer.parentElement.classList.remove('is-hidden');
+            var listProcess = [
+                'copyMakeBorder', 'gray', 'thresh', 'output'
+            ];
 
-        var item3 = document.createElement('div');
-        item3.setAttribute('class', 'block');
-        item3.innerHTML = `
-        <div>
-        <p class="subtitle">gray</p>
-        <figure class="image" >
-                <img src="${result.gray}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>
-        </div>`;
-        processContainer.appendChild(item3);
-
-        var item4 = document.createElement('div');
-        item4.setAttribute('class', 'block');
-        item4.innerHTML = `
-        <div >
-        <p class="subtitle">out put</p>
-        <figure class="image" >
-                <img src="${result.output}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>
-        </div>`;
-        processContainer.appendChild(item4);
+            listProcess.forEach(function (item, index) {
+                var name = listProcess[index];
+                var src = result[name];
+                var item2 = document.createElement('div');
+                item2.setAttribute('class', 'block');
+                item2.innerHTML = `
+            <div>
+            <p class="subtitle">${name}</p>
+            <figure class="image" >
+                    <img src="${src}" style="
+                    max-height: 80vh;
+                    object-fit: cover;
+                    width: auto;
+                ">
+                </figure>
+            </div>`;
+                processContainer.appendChild(item2);
+            })
+        } else {
+            shinobi.notification.notification.error('Không tạo được ảnh Panorama, vui lòng xem lại ảnh đầu vào.');
+        }
     },
 
     addUtilCode: function () {

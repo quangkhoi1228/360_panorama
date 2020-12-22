@@ -156,7 +156,6 @@ def cropAndDetectTrafficSign(context):
 #     return context
 
 def stitching(context):
-    print(context)
     current_path = os.getcwd()
     #get all image input 
     image_list = []
@@ -178,6 +177,9 @@ def stitching(context):
         context['stitched_gray'] = settings.MEDIA_URL+'stitched_gray.jpg'
 
         thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)[1]
+        cv2.imwrite(settings.MEDIA_ROOT+ "/stitched_thresh.jpg", thresh)
+        context['stitched_thresh'] = settings.MEDIA_URL+'stitched_thresh.jpg'
+
 
         # the stitched image
         cnts = cv2.findContours(thresh.copy(), cv2.RETR_EXTERNAL,
@@ -187,9 +189,14 @@ def stitching(context):
 
         # rectangular bounding box of the stitched image region
         mask = np.zeros(thresh.shape, dtype="uint8")
-        (x, y, w, h) = cv2.boundingRect(c)
-        cv2.rectangle(mask, (x, y), (x + w, y + h), 255, -1)
+        cv2.imwrite(settings.MEDIA_ROOT+ "/stitched_mask.jpg", mask)
+        context['stitched_mask'] = settings.MEDIA_URL+'stitched_mask.jpg'
 
+
+        (x, y, w, h) = cv2.boundingRect(c)
+        rectangle = cv2.rectangle(mask, (x, y), (x + w, y + h), 255, -1)
+        cv2.imwrite(settings.MEDIA_ROOT+ "/stitched_rectangle.jpg", rectangle)
+        context['stitched_rectangle'] = settings.MEDIA_URL+'stitched_rectangle.jpg'
     # create two copies of the mask: one to serve as our actual
         minRect = mask.copy()
         sub = mask.copy()
