@@ -86,7 +86,7 @@ var indexrender = {
             item4.setAttribute('class', 'block');
             item4.innerHTML = `
             <div >
-            <p class="subtitle">out put</p>
+            <p class="subtitle">output</p>
             <figure class="image" >
                     <img src="${result.output}" style="
                     max-height: 80vh;
