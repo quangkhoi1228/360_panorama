@@ -37,65 +37,70 @@ var indexrender = {
             </figure>`;
             inputContainer.appendChild(item);
         });
+        if (result.status == 'True') {
+            var outputContainer = document.getElementById('imageOutput');
+            outputContainer.parentElement.classList.remove('is-hidden');
+            var item1 = document.createElement('div');
+            item1.innerHTML = `<figure class="image" >
+                    <img src="${result.output}" style="
+                    max-height: 80vh;
+                    object-fit: cover;
+                    width: auto;
+                ">
+                </figure>`;
+            outputContainer.appendChild(item1);
 
-        var outputContainer = document.getElementById('imageOutput');
-        outputContainer.parentElement.classList.remove('is-hidden');
-        var item1 = document.createElement('div');
-        item1.innerHTML = `<figure class="image" >
-                <img src="${result.output}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>`;
-        outputContainer.appendChild(item1);
+            var processContainer = document.getElementById('imageProcess');
+            processContainer.parentElement.classList.remove('is-hidden');
+            var item2 = document.createElement('div');
+            item2.setAttribute('class', 'block');
+            item2.innerHTML = `
+            <div>
+            <p class="subtitle">copyMakeBorder</p>
+            <figure class="image" >
+                    <img src="${result.copyMakeBorder}" style="
+                    max-height: 80vh;
+                    object-fit: cover;
+                    width: auto;
+                ">
+                </figure>
+            </div>`;
+            processContainer.appendChild(item2);
 
-        var processContainer = document.getElementById('imageProcess');
-        processContainer.parentElement.classList.remove('is-hidden');
-        var item2 = document.createElement('div');
-        item2.setAttribute('class', 'block');
-        item2.innerHTML = `
-        <div>
-        <p class="subtitle">copyMakeBorder</p>
-        <figure class="image" >
-                <img src="${result.copyMakeBorder}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>
-        </div>`;
-        processContainer.appendChild(item2);
+            var item3 = document.createElement('div');
+            item3.setAttribute('class', 'block');
+            item3.innerHTML = `
+            <div>
+            <p class="subtitle">gray</p>
+            <figure class="image" >
+                    <img src="${result.gray}" style="
+                    max-height: 80vh;
+                    object-fit: cover;
+                    width: auto;
+                ">
+                </figure>
+            </div>`;
+            processContainer.appendChild(item3);
 
-        var item3 = document.createElement('div');
-        item3.setAttribute('class', 'block');
-        item3.innerHTML = `
-        <div>
-        <p class="subtitle">gray</p>
-        <figure class="image" >
-                <img src="${result.gray}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>
-        </div>`;
-        processContainer.appendChild(item3);
+            var item4 = document.createElement('div');
+            item4.setAttribute('class', 'block');
+            item4.innerHTML = `
+            <div >
+            <p class="subtitle">out put</p>
+            <figure class="image" >
+                    <img src="${result.output}" style="
+                    max-height: 80vh;
+                    object-fit: cover;
+                    width: auto;
+                ">
+                </figure>
+            </div>`;
+            processContainer.appendChild(item4);
+        } else {
+            shinobi.notification.notification.error('Tạo ảnh Panorama không thành công. Vui lòng xem lại ảnh đầu vào');
+        }
 
-        var item4 = document.createElement('div');
-        item4.setAttribute('class', 'block');
-        item4.innerHTML = `
-        <div >
-        <p class="subtitle">out put</p>
-        <figure class="image" >
-                <img src="${result.output}" style="
-                max-height: 80vh;
-                object-fit: cover;
-                width: auto;
-            ">
-            </figure>
-        </div>`;
-        processContainer.appendChild(item4);
+
     },
 
     addUtilCode: function () {
